@@ -1,0 +1,29 @@
+{
+  "elements": [
+    {
+      "value": "Тхиs иs sоmе Рандоm Текст",
+      "transformers": [
+        {
+          "group": "group1",
+          "transformerId": "REMOVAL",
+          "parameters": [
+            "s"
+          ]
+        },
+        {
+          "group": "group1",
+          "transformerId": "REPLACEMENT",
+          "parameters": [
+            "m",
+            "X"
+          ]
+        },
+        {
+          "group": "group1",
+          "transformerId": "TRANSLITERATION",
+          "parameters": null
+        }
+      ]
+    }
+  ]
+}

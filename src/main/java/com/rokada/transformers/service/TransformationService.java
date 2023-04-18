@@ -1,15 +1,15 @@
 package com.rokada.transformers.service;
 
-import com.rokada.transformers.model.ElementResponse;
-import com.rokada.transformers.model.ElementWrapper;
+import com.rokada.transformers.model.ElementRequestWrapper;
+import com.rokada.transformers.model.ElementResponseWrapper;
 
 public interface TransformationService {
 
   /**
-   * Do the {@link ElementWrapper} data transformation based on transformers.
+   * Do the {@link ElementRequestWrapper} data transformation based on transformers.
    *
-   * @param elementWrapper data to transform along with transformers
-   * @return {@link ElementResponse}
+   * @param elementRequestWrapper data to transform along with transformers
+   * @return {@link ElementResponseWrapper}
    */
-  ElementResponse processData(ElementWrapper elementWrapper);
+  ElementResponseWrapper processData(ElementRequestWrapper elementRequestWrapper);
 }

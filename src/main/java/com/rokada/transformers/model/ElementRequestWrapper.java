@@ -5,7 +5,7 @@ import lombok.Data;
 
 
 @Data
-public class ElementWrapper {
+public class ElementRequestWrapper {
 
   List<ElementDto> elements;
 }

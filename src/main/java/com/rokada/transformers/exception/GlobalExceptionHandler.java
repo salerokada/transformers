@@ -1,6 +1,6 @@
 package com.rokada.transformers.exception;
 
-import com.rokada.transformers.model.ElementResponse;
+import com.rokada.transformers.model.ElementResponseWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(value = {TransformerException.class})
-  public ElementResponse handleTransformerException(TransformerException ex) {
+  public ElementResponseWrapper handleTransformerException(TransformerException ex) {
     log.error("TransformerException message: {}", ex.getMessage());
 
     return ex.getElementResponse();

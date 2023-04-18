@@ -18,6 +18,7 @@
 
   <properties>
     <java.version>17</java.version>
+    <main.basedir>${project.basedir}</main.basedir>
   </properties>
 
   <dependencies>
@@ -58,6 +59,7 @@
   <build>
     <plugins>
       <plugin>
+
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
@@ -69,6 +71,112 @@
           </excludes>
         </configuration>
       </plugin>
+
+      <!-- Code Coverage-->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.9</version>
+        <configuration>
+          <excludes>
+            <exclude>**/configuration/**</exclude>
+            <exclude>**/exception/**</exclude>
+            <exclude>**/interceptor/**</exclude>
+            <exclude>**/TransformersApplication.*</exclude>
+          </excludes>
+          <rules>
+            <rule>
+              <element>BUNDLE</element>
+              <limits>
+                <limit>
+                  <counter>LINE</counter>
+                  <value>COVEREDRATIO</value>
+                  <minimum>0.80</minimum>
+                </limit>
+              </limits>
+            </rule>
+          </rules>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-check</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- PMD - static code analyzer -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.20.0</version>
+        <configuration>
+          <linkXRef>false</linkXRef>
+          <printFailingErrors>true</printFailingErrors>
+          <failOnViolation>false</failOnViolation>
+        </configuration>
+        <executions>
+          <execution>
+            <id>validate</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>4.7.3.4</version>
+        <configuration>
+          <effort>Max</effort>
+          <threshold>Medium</threshold>
+          <failOnError>true</failOnError>
+          <xmlOutput>true</xmlOutput>
+          <excludeFilterFile>
+            ${main.basedir}${file.separator}build-tools${file.separator}spotbugs-security-exclude.xml
+          </excludeFilterFile>
+          <includeFilterFile>
+            ${main.basedir}${file.separator}build-tools${file.separator}spotbugs-security-include.xml
+          </includeFilterFile>
+          <plugins>
+            <plugin>
+              <groupId>com.h3xstream.findsecbugs</groupId>
+              <artifactId>findsecbugs-plugin</artifactId>
+              <version>1.12.0</version>
+            </plugin>
+            <plugin>
+              <groupId>com.mebigfatguy.sb-contrib</groupId>
+              <artifactId>sb-contrib</artifactId>
+              <version>7.6.0</version>
+            </plugin>
+          </plugins>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 

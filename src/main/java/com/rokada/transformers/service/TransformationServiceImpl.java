@@ -4,14 +4,13 @@ import com.rokada.transformers.enums.TransformerType;
 import com.rokada.transformers.exception.BadRequestException;
 import com.rokada.transformers.exception.DefaultException;
 import com.rokada.transformers.model.ElementDto;
-import com.rokada.transformers.model.ElementResponse;
-import com.rokada.transformers.model.ElementWrapper;
+import com.rokada.transformers.model.ElementDtoResponse;
+import com.rokada.transformers.model.ElementRequestWrapper;
+import com.rokada.transformers.model.ElementResponseWrapper;
 import com.rokada.transformers.model.TransformerDto;
 import com.rokada.transformers.util.Transliteration;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -19,17 +18,21 @@ import org.springframework.util.CollectionUtils;
 public class TransformationServiceImpl implements TransformationService {
 
   @Override
-  public ElementResponse processData(ElementWrapper elementWrapper) {
-    List<ElementDto> elements = elementWrapper.getElements();
+  public ElementResponseWrapper processData(ElementRequestWrapper elementRequestWrapper) {
+    List<ElementDto> elements = elementRequestWrapper.getElements();
 
     if (CollectionUtils.isEmpty(elements)) {
-      return new ElementResponse(Collections.emptyMap());
+      return new ElementResponseWrapper(Collections.emptyList());
     }
 
-    Map<String, String> processedValues = elements.stream()
-        .collect(Collectors.toMap(ElementDto::getValue, this::processElement));
+    List<ElementDtoResponse> elementResponses = elements.stream()
+        .map(elementDto -> {
+          String transformed = processElement(elementDto);
+          return new ElementDtoResponse(elementDto.getValue(), transformed);
+        })
+        .toList();
 
-    return new ElementResponse(processedValues);
+    return new ElementResponseWrapper(elementResponses);
   }
 
   private String processElement(ElementDto elementDto) {

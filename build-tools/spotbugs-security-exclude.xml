@@ -1,0 +1,14 @@
+<FindBugsFilter>
+  <Match>
+    <Bug pattern="CRLF_INJECTION_LOGS"/>
+  </Match>
+  <Match>
+    <Bug pattern="SERVLET_HEADER"/>
+  </Match>
+  <Match>
+    <Bug pattern="SPRING_ENDPOINT"/>
+  </Match>
+  <Match>
+    <Bug pattern="SPRING_CSRF_PROTECTION_DISABLED"/>
+  </Match>
+</FindBugsFilter>

@@ -1,8 +1,8 @@
 package com.rokada.transformers.controller;
 
 import com.rokada.transformers.interceptor.Transformer;
-import com.rokada.transformers.model.ElementResponse;
-import com.rokada.transformers.model.ElementWrapper;
+import com.rokada.transformers.model.ElementRequestWrapper;
+import com.rokada.transformers.model.ElementResponseWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,8 +28,8 @@ public class TransformerController {
   @Transformer
   @Operation(summary = "Process transformation on input data and return original and processed data.")
   @ApiResponse(responseCode = "200", description = "Data is successfully transformed")
-  public ResponseEntity<ElementResponse> elementTransformation(
-      @Valid @RequestBody ElementWrapper request) {
+  public ResponseEntity<ElementResponseWrapper> elementTransformation(
+      @Valid @RequestBody ElementRequestWrapper request) {
     return ResponseEntity
         .status(HttpStatus.OK)
         .build();

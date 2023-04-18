@@ -1,0 +1,29 @@
+{
+  "elements": [
+    {
+      "value": "Αυτό είναι κάποιο τυχαίο κείμενο aaaaa.",
+      "transformers": [
+        {
+          "group": "group1",
+          "transformerId": "REMOVAL",
+          "parameters": [
+            ".a"
+          ]
+        },
+        {
+          "group": "group1",
+          "transformerId": "REPLACEMENT",
+          "parameters": [
+            "m",
+            "X"
+          ]
+        },
+        {
+          "group": "group1",
+          "transformerId": "TRANSLITERATION",
+          "parameters": null
+        }
+      ]
+    }
+  ]
+}

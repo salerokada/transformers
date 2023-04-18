@@ -18,17 +18,21 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
 
   @Pointcut("within(com.rokada.transformers.controller..*)")
-  public void endpointMethods() {
+  public void controller() {
   }
 
-  @Before("endpointMethods()")
+  @Pointcut("execution(* *.*(..))")
+  protected void allMethod() {
+  }
+
+  @Before("controller()")
   public void logBefore(JoinPoint joinPoint) {
     String args = fetchArgs(joinPoint);
     log.info("Started executing controller method: {}.{}() with method arguments: {}.",
         joinPoint.getTarget().getClass().getSimpleName(), joinPoint.getSignature().getName(), args);
   }
 
-  @After("endpointMethods()")
+  @After("controller()")
   public void logAfter(JoinPoint joinPoint) {
     log.info("Successfully executed controller method: {}.{}().",
         joinPoint.getTarget().getClass().getSimpleName(), joinPoint.getSignature().getName());
