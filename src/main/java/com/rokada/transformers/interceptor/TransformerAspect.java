@@ -21,7 +21,7 @@ public class TransformerAspect {
   private final TransformationService transformationService;
 
   @Pointcut("@annotation(com.rokada.transformers.interceptor.Transformer)")
-  private void transform() {
+  public void transform() {
   }
 
   @Around("transform()")

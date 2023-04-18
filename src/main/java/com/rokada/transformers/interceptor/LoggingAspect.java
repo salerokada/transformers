@@ -21,10 +21,6 @@ public class LoggingAspect {
   public void controller() {
   }
 
-  @Pointcut("execution(* *.*(..))")
-  protected void allMethod() {
-  }
-
   @Before("controller()")
   public void logBefore(JoinPoint joinPoint) {
     String args = fetchArgs(joinPoint);

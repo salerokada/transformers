@@ -127,7 +127,7 @@
         <configuration>
           <linkXRef>false</linkXRef>
           <printFailingErrors>true</printFailingErrors>
-          <failOnViolation>false</failOnViolation>
+          <failOnViolation>true</failOnViolation>
         </configuration>
         <executions>
           <execution>
